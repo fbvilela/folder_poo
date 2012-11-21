@@ -1,0 +1,16 @@
+<h1>Folders</h1>
+<h3> <%= @message %> </h3>
+<ul>
+	<%= @folders.each do |folder| %>
+	<li>
+		<%= folder.name %> <%= link_to "git pull", "/poo/pull?path=#{folder.path}&branch=master" %>
+	</li>
+	<%end unless @folders.blank? %> 
+</ul>
+<br/>
+
+<%= form_tag "/poo/reload" do %>
+<%= label_tag(:folder, "Parent Folder:") %>
+  <%= text_field_tag(:folder, session["folder"]) %>
+  <%= submit_tag("Reload Repositories") %>
+<% end %>
